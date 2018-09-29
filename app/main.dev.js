@@ -76,6 +76,7 @@ if (argv.length >= 2) {
   argv.shift();
   if (!argv[0].startsWith('-')) argv.shift();
 }
+
 program
   .version('1.0.2', '-v, --version')
   .option('-u, --userid <userid>', 'UserID')
@@ -89,10 +90,11 @@ program
   .option('--update-port [port]', 'IP Update Port', parseInt, 65010)
   .parse(['', '', ...argv]);
 
-const opt = program.opts();
-delete opt.version;
-delete opt.ip;
-console.log(opt);
+const opt = {
+  userid: program.userid,
+  password: program.password,
+  domain: program.domain,
+};
 if (Object.values(opt).some(v => v !== undefined)) {
   (async () => {
     if (Object.values(opt).some(v => v === undefined)) {
