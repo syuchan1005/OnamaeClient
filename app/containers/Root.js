@@ -20,8 +20,9 @@ ipcRenderer.on('menu:clickRunAll', () => {
 
 const { generalSetting } = s.getState();
 const nextTime = moment(generalSetting.$data.ipUpdate, 'YYYY/MM/DD HH:mm:ss')
-  .add(generalSetting.ipInterval, 'minutes').format('YYYY/MM/DD HH:mm:ss');
-ipcRenderer.send('onamae:setTimer', nextTime);
+  .add(generalSetting.ipInterval, 'minutes');
+const now = moment().valueOf();
+ipcRenderer.send('onamae:setTimer', ((nextTime.valueOf() - now) < 0 ? now : nextTime).format('YYYY/MM/DD HH:mm:ss'));
 
 export default class Root extends Component {
   static propTypes = {
