@@ -1,6 +1,6 @@
 {
   "name": "onamae_client",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Onamae.com Dynamic DNS Client",
   "main": "./main.prod.js",
   "author": {
